@@ -1,7 +1,7 @@
 module.exports = {
 
     mysqlconnection : {
-        host: 'kurama:3306',
+        host: 'kurama',
         user: 'dbuser',
         password: 'dbadmin',
         database: 'department_of_education'

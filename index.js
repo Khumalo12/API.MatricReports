@@ -11,6 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 var connection = mysqlconnection.createdbconnection();
 var validationIssues = [];
 
+app.get('/', function (req, res) {
+    res.json({
+        "name": "API.MatricResults",
+        "status": "Running",
+    });
+})
+
 app.get('/api/matricresults', function (req, res) {
     var results = mysqlconnection.selectAllResultsRecords(connection);
     res.json(results);
@@ -40,4 +47,6 @@ app.post('/api/matricresults/', function (req, res) {
     }
 })
 
-app.listen(config.port);
+app.listen(config.port, function () {
+    console.log('Node app is running on port', config.port);
+});
