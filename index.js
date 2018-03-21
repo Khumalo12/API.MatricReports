@@ -11,26 +11,22 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 var connection = mysqlconnection.createdbconnection();
 var validationIssues = [];
 
-app.get('/api/matricresults',function (req, res)
-{
+app.get('/api/matricresults', function (req, res) {
     var results = mysqlconnection.selectAllResultsRecords(connection);
     res.json(results);
 })
 
-app.get('/api/matricresults/:year',function (req, res)
-{
+app.get('/api/matricresults/:year', function (req, res) {
     var results = mysqlconnection.selectResultsByYearRecords(connection);
     res.json(results);
 })
 
-app.get('/api/matricresults/:school',function (req, res)
-{
+app.get('/api/matricresults/:school', function (req, res) {
     var results = mysqlconnection.selectResultsBySchoolRecords(connection);
     res.json(results);
 })
 
-app.post('/api/matricresults/',function (req, res)
-{
+app.post('/api/matricresults/', function (req, res) {
     if (!req.body.name_of_school) {
         validationIssues.push("Name of school required");
     }
@@ -38,8 +34,10 @@ app.post('/api/matricresults/',function (req, res)
     if (!req.body.centre_no) {
         validationIssues.push("Centre number required");
     }
-
-    
+    else {
+        var results = mysqlconnection.insertMatricResultRecord(connection, request);
+        res.json(results);
+    }
 })
 
 app.listen(config.port);
