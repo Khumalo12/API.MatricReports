@@ -7,5 +7,5 @@ module.exports = {
         database: 'department_of_education'
     },
 
-    port : process.env.WEB_PORT || 5000,
+    port : process.env.PORT,
 };
